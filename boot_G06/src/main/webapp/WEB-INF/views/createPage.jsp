@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CreatePage</title>
 </head>
 <body>
-<%
-    out.println("Model : Hello World");
-%>
-<br>
-당신의 이름은 ${member.name}입니다.
-
-<br>
-당신의 아이디는 ${member.id}입니다.
+    <form action="create">
+        작성자 : <input type="text" name="writer"><br>
+        내용 : <input type="text" name="content"><br>
+        <input type="submit" value="send">
+        <br>
+    </form>
 </body>
 </html>
