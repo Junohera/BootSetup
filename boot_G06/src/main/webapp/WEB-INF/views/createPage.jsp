@@ -9,8 +9,8 @@
 </head>
 <body>
     <form action="create">
-        작성자 : <input type="text" name="writer"><br>
-        내용 : <input type="text" name="content"><br>
+        작성자 : <input type="text" name="writer" value="${c.writer}"><br>
+        내용 : <input type="text" name="content" value="${c.content}"><br>
         <input type="submit" value="send">
         <br>
     </form>
