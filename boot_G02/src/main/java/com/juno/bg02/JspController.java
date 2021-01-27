@@ -15,4 +15,9 @@ public class JspController {
         // htp://localhost:8070/의 결과는 main.jsp이겠지만 (별도 경로 설정 및 폴더 생성 필요)
         // 함수 이름에 @ResponseBody가 있으면 리턴되는 문자열이 웹 브라우저에 직접 쓰여지게됩니다.
     }
+
+    @RequestMapping(value = "/test1")
+    public String test1() {
+        return "main"; // 실제 호출될 webapp/WEB-INF/views/test1.jsp
+    }
 }
