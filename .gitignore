@@ -23,7 +23,6 @@
 hs_err_pid*
 
 
-.classpath
 bin
 temp
 .DS_Store
@@ -31,10 +30,34 @@ copy
 .settings
 build
 MANIFEST.MF
-.class
 
 .metadata/*
 /.metadata/
 Servers/Tomcat v9.0 Server at localhost-config/server.xml
 Servers/*
 */target/*
+
+
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
