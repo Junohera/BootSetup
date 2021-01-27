@@ -18,6 +18,6 @@ public class JspController {
 
     @RequestMapping(value = "/test1")
     public String test1() {
-        return "main"; // 실제 호출될 webapp/WEB-INF/views/test1.jsp
+        return "main"; // 실제 호출될 webapp/WEB-INF/views/main.jsp
     }
 }
