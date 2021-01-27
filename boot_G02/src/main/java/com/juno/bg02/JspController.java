@@ -20,4 +20,9 @@ public class JspController {
     public String test1() {
         return "main"; // 실제 호출될 webapp/WEB-INF/views/main.jsp
     }
+
+    @RequestMapping(value = "/test2")
+    public String test2() {
+        return "sub/sub"; // realpath : WEB-INF/views/sub/sub.jsp
+    }
 }
