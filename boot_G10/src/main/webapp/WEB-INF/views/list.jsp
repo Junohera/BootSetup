@@ -19,7 +19,7 @@
             <tr>
                 <td>${item.id}</td>
                 <td>${item.writer}</td>
-                <td><a href="view?id=${item.id}"></a>${item.title}</td>
+                <td><a href="view?id=${item.id}">${item.title}</a></td>
                 <td><a href="delete?id=${item.id}">X</a></td>
             </tr>
         </c:forEach>
