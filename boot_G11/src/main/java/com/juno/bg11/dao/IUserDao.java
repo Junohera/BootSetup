@@ -8,5 +8,5 @@ import com.juno.bg11.dto.User;
 
 @Mapper
 public interface IUserDao {
-	public List<User> list();
+	List<User> list();
 }
