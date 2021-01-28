@@ -11,6 +11,7 @@ public interface IBbsDao {
 	List<Bbs> list();
 	Bbs view(String id);
 	int write(Bbs b);
+	// int write(String writer, String title, String content);
 	int update(Bbs b);
 	int delete(Bbs b);
 }

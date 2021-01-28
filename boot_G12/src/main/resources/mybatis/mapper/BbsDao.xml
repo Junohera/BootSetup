@@ -6,4 +6,20 @@
     <select id="list" resultType="com.juno.bg12.dto.Bbs">
         SELECT * FROM bbs order by id desc
     </select>
-</mapper>
+    
+    <select id="view" resultType="com.juno.bg12.dto.Bbs" parameterType="String">
+        SELECT * FROM bbs where id = #{id}
+    </select>
+    
+    <insert id="write" parameterType="com.juno.bg12.dto.Bbs">
+    	insert into bbs (id, writer, title, content)
+    	values (bbs_seq.nextval, #{writer}, #{title}, #{content})
+    </insert>
+    
+    <!-- 
+    <insert id="write">
+    	insert into bbs (id, writer, title, content)
+    	values (bbs_seq.nextval, #{param1}, #{param2}, #{param3})
+    </insert>
+     -->
+</mapper> 

@@ -32,9 +32,20 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value="write", method=RequestMethod.POST)
-	public String write(@ModelAttribute("b") @Valid Bbs b, BindingResult result, Model model) {
+	public String write(
+		@ModelAttribute("b") @Valid Bbs b
+		, BindingResult result
+		, Model model) {
 		
-		return "redirect:/view";
+		if (result.hasErrors()) {
+			if (result.getFieldError("writer") != null) model.addAttribute("msg", result.getFieldError("writer").getDefaultMessage());
+			else if (result.getFieldError("title") != null) model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
+			else if (result.getFieldError("content") != null) model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
+			return "writeForm";
+		} else {
+			bdao.write(b);
+			return "redirect:/";
+		}
 	}
 	
 	@RequestMapping("view")
