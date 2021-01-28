@@ -13,6 +13,7 @@
         내용 : <input type="text" name="content" value="${c.content}"><br>
         <input type="submit" value="send">
         <br>
+        ${msg}
     </form>
 </body>
 </html>
