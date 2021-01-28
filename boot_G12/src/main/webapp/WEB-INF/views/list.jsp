@@ -17,10 +17,10 @@
         </tr>
         <c:forEach var="item" items="${list}" varStatus="status">
             <tr>
-                <td>${item.id}</td>
-                <td>${item.writer}</td>
+                <td align="center">${item.id}</td>
+                <td align="center">${item.writer}</td>
                 <td><a href="view?id=${item.id}">${item.title}</a></td>
-                <td><a href="delete?id=${item.id}">X</a></td>
+                <td align="center"><a href="delete?id=${item.id}">X</a></td>
             </tr>
         </c:forEach>
     </table>

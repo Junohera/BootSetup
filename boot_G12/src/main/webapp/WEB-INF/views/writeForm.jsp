@@ -12,13 +12,13 @@
     <table width="500" cellpadding="0" cellspacing="0" border="1">
         <form action="write" method="POST">
             <tr>
-                <td>작성자</td> <td><input type="text" name="writer" size="100"></td>
+                <td>작성자</td> <td><input type="text" name="writer" size="100" value="${b.writer}"></td>
             </tr>
             <tr>
-                <td>제목</td> <td><input type="text" name="title" size="100"></td>
+                <td>제목</td> <td><input type="text" name="title" size="100" value="${b.title}"></td>
             </tr>
             <tr>
-                <td>내용</td> <td><input type="text" name="content" size="100"></td>
+                <td>내용</td> <td><input type="text" name="content" size="100" value="${b.content}"></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -26,7 +26,11 @@
                     <a href="/">목록보기</a>
                 </td>
             </tr>
+            <tr>
+            	<td colspan="2">${msg}</td>
+            </tr>
         </form>
+        <br>
     </table>    
 </body>
 </html>
