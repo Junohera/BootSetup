@@ -18,4 +18,14 @@ create table bbs(
     content varchar2(1000)
 );
 
+select * from bbs order by id desc;
+
 insert into bbs values('hong', 'gildon', '반갑습니다', '수고하세요');
+
+CREATE SEQUENCE bbs_SEQ START WITH 1 INCREMENT BY 1;
+delete from bbs;
+
+
+insert into bbs values('hong', 'gildong', '반갑습니다', '수고하세요');
+insert into bbs values('hong', 'gildona', '반갑습니다', '수고하세요');
+insert into bbs values('hong', 'gildonz', '반갑습니다', '수고하세요');
