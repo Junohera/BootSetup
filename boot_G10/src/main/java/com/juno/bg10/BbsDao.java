@@ -43,7 +43,7 @@ public class BbsDao implements IbbsDao {
 
 	@Override
 	public int delete(String id) {
-		return 0;
+		return jdbcTemplate.update("delete from bbs where id = ?", id);
 	}
 
 }

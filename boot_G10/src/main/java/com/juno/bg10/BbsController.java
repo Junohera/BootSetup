@@ -34,5 +34,11 @@ public class BbsController {
 		model.addAttribute("b", bdao.view(id));
 		return "view";
 	}
+	
+	@RequestMapping("delete")
+	public String delete(Model model, @RequestParam("id") String id) {
+		bdao.delete(id);
+		return "redirect:/";
+	}
 
 }
