@@ -13,5 +13,5 @@ public interface IBbsDao {
 	int write(Bbs b);
 	// int write(String writer, String title, String content);
 	int update(Bbs b);
-	int delete(Bbs b);
+	int delete(String id);
 }

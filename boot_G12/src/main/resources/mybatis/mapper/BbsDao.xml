@@ -4,17 +4,21 @@
 
 <mapper namespace="com.juno.bg12.dao.IBbsDao">
     <select id="list" resultType="com.juno.bg12.dto.Bbs">
-        SELECT * FROM bbs order by id desc
+        select * from bbs order by id desc
     </select>
     
-    <select id="view" resultType="com.juno.bg12.dto.Bbs" parameterType="String">
-        SELECT * FROM bbs where id = #{id}
+    <select id="view" resultType="com.juno.bg12.dto.Bbs">
+        select * from bbs where id = #{param1}
     </select>
     
     <insert id="write" parameterType="com.juno.bg12.dto.Bbs">
     	insert into bbs (id, writer, title, content)
     	values (bbs_seq.nextval, #{writer}, #{title}, #{content})
     </insert>
+    
+    <delete id="delete">
+    	delete from bbs where id = #{param1}
+    </delete>
     
     <!-- 
     <insert id="write">
