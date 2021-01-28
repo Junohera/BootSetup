@@ -48,6 +48,23 @@ public class BbsController {
 		}
 	}
 	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String update(
+		@ModelAttribute("b") @Valid Bbs b
+		, BindingResult result
+		, Model model) {
+		
+		if (result.hasErrors()) {
+			if (result.getFieldError("writer") != null) model.addAttribute("msg", result.getFieldError("writer").getDefaultMessage());
+			else if (result.getFieldError("title") != null) model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
+			else if (result.getFieldError("content") != null) model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
+			return "updateForm";
+		} else {
+			bdao.update(b);
+			return "redirect:/";
+		}
+	}
+	
 	@RequestMapping("view")
 	public String view(Model model
 			, @RequestParam("id") String id) {
@@ -59,5 +76,11 @@ public class BbsController {
 	public String delete(@RequestParam("id") String id) {
 		bdao.delete(id);
 		return "redirect:/";
+	}
+	
+	@RequestMapping("updateForm")
+	public String updateForm(@RequestParam("id") String id, Model model) {
+		model.addAttribute("b", bdao.view(id));
+		return "updateForm";
 	}
 }

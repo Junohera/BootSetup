@@ -10,7 +10,8 @@
 <body>
     <br>
     <table width="500" cellpadding="0" cellspacing="0" border="1">
-        <form action="write" method="POST">
+        <form action="update" method="POST">
+        	<input type="hidden" name="id" value="${b.id}">
             <tr>
                 <td>작성자</td> <td><input type="text" name="writer" size="100" value="${b.writer}"></td>
             </tr>
@@ -22,7 +23,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="add">&nbsp;&nbsp;
+                    <input type="submit" value="modify">&nbsp;&nbsp;
                     <a href="/">list</a>
                 </td>
             </tr>

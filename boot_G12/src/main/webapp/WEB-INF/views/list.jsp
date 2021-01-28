@@ -13,6 +13,7 @@
             <td>번호</td>
             <td>작성자</td>
             <td>제목</td>
+            <td>수정</td>
             <td>삭제</td>
         </tr>
         <c:forEach var="item" items="${list}" varStatus="status">
@@ -20,6 +21,7 @@
                 <td align="center">${item.id}</td>
                 <td align="center">${item.writer}</td>
                 <td><a href="view?id=${item.id}">${item.title}</a></td>
+                <td align="center"><a href="updateForm?id=${item.id}">mod</a></td>
                 <td align="center"><a href="delete?id=${item.id}">X</a></td>
             </tr>
         </c:forEach>

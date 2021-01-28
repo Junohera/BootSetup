@@ -20,6 +20,14 @@
     	delete from bbs where id = #{param1}
     </delete>
     
+    <update id="update" parameterType="com.juno.bg12.dto.Bbs">
+    	update bbs set
+            writer = #{writer}
+            , title = #{title}
+            , content = #{content}
+    	where id = #{id}
+    </update>
+    
     <!-- 
     <insert id="write">
     	insert into bbs (id, writer, title, content)
