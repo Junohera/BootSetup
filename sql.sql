@@ -10,3 +10,12 @@ insert into myuser values('hong4', '홍길동4');
 insert into myuser values('hong5', '홍길동5');
 
 select * from myuser;
+
+create table bbs(
+    id varchar2(30),
+    writer varchar2(30),
+    title varchar2(30),
+    content varchar2(1000)
+);
+
+insert into bbs values('hong', 'gildon', '반갑습니다', '수고하세요');
