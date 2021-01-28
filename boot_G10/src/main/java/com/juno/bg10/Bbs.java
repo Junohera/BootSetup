@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Bbs {
-	private int id;
+	private String id;
 	private String writer;
 	private String title;
 	private String content;
