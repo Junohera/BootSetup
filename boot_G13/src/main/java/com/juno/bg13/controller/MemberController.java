@@ -21,6 +21,37 @@ public class MemberController {
 	
 	@Autowired
 	MemberService ms;
+
+	@RequestMapping(value = "/memberEdit", method = RequestMethod.POST)
+	public String memberEdit(Model model, HttpServletRequest request
+			, @ModelAttribute("m") @Valid Member m
+			, BindingResult result
+			, @RequestParam("pw_check") String pwchk
+			) {
+
+		if (result.getFieldError("pw") != null) {
+			model.addAttribute("message", result.getFieldError("pw").getDefaultMessage());
+			return "member/memberEditForm";
+		} else if (result.getFieldError("name") != null) {
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+			return "member/memberEditForm";
+		} else if (!m.getPw().equals(pwchk)) {
+			model.addAttribute("message", "비밀번호 체크를 다시 해주세요.");
+			return "member/memberEditForm";
+		} else {
+			ms.updateMember(m);
+			request.getSession().setAttribute("loginUser", m);
+			return "redirect:/main";
+		}
+	}
+
+	@RequestMapping("/memberEditForm")
+	public String memberEditForm(HttpServletRequest request) {
+		if (request.getSession().getAttribute("loginUser") == null) {
+			return "loginForm";
+		}
+		return "member/memberEditForm";
+	}
 	
 	@RequestMapping(value = "/memberJoin", method = RequestMethod.POST)
 	public String memJoin(
