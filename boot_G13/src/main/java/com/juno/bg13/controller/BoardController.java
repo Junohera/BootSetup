@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.juno.bg13.service.BoardService;
 import com.juno.bg13.util.Paging;
@@ -16,8 +17,14 @@ public class BoardController {
 	
 	@Autowired
 	BoardService bs;
-	
-	
+
+	@RequestMapping(value = "/boardView")
+	public String boardView(Model model, HttpServletRequest request
+			, @RequestParam("num") int num) {
+		model.addAttribute("b", bs.readBoard(num));
+		model.addAttribute("replyList", bs.selectReply(num));
+		return "board/boardView";
+	}
 	
 	@RequestMapping("memberJoinForm")
 	public String memberJoinForm() {

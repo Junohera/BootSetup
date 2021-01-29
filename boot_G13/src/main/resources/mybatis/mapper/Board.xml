@@ -16,5 +16,24 @@
             from ((select * from board order by num desc) b)
         ) where rn &gt;= #{startNum}
         ) where rn &lt;= #{endNum}
-    </select>    
+    </select>
+    
+    <select id="getBoard" resultType="com.juno.bg13.dto.Board">
+    	select * from board where num = #{param1}
+    </select>
+    
+    <update id="incrementReadcount">
+    	update board
+    		set readcount = readcount+1
+    	where num = #{param}
+    </update>
+    
+    <select id="selectReply" resultType="com.juno.bg13.dto.Reply">
+    	select * from reply
+    	where boardnum = #{param1} order by num desc
+    </select>
+    
+    <select id="getReplyCnt" resultType="_int">
+    	select count(*) from reply where boardnum = #{param1}
+    </select>
 </mapper>
