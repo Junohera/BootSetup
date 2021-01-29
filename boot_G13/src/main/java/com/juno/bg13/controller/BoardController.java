@@ -17,6 +17,19 @@ public class BoardController {
 	@Autowired
 	BoardService bs;
 	
+	
+	
+	@RequestMapping("memberJoinForm")
+	public String memberJoinForm() {
+		return "member/memberJoinForm";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "loginForm";
+	}
+	
 	@RequestMapping("/main")
 	public String goMain(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();

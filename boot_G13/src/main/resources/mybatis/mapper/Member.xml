@@ -6,4 +6,24 @@
     	select * from spmember where id = #{param1}
     </select>
     
+    <insert id="insertMember">
+    	insert into spmember(
+            id
+            , pw
+            , name
+            , email
+            , phone1
+            , phone2
+            , phone3
+        ) values (
+            #{param1}
+            , #{param2}
+            , #{param3}
+            , #{param4}
+            , #{param5}
+            , #{param6}
+            , #{param7}
+        )
+    </insert>
+    
 </mapper>

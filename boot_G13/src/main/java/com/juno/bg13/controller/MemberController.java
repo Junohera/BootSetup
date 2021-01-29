@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.juno.bg13.dto.Member;
 import com.juno.bg13.service.MemberService;
@@ -20,6 +21,40 @@ public class MemberController {
 	
 	@Autowired
 	MemberService ms;
+	
+	@RequestMapping(value = "/memberJoin", method = RequestMethod.POST)
+	public String memJoin(
+			@ModelAttribute("m") @Valid Member m
+			, BindingResult result
+			, @RequestParam("re_id") String reid
+			, @RequestParam("pw_check") String pwchk
+			, Model model, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			
+			if (result.getFieldError("id") != null) model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
+			else if (result.getFieldError("pw") != null) model.addAttribute("message", result.getFieldError("pw").getDefaultMessage());
+			else if (result.getFieldError("name") != null) model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+			
+			return "member/memberJoinForm";
+		} else if (!m.getId().equals(reid)) {
+			model.addAttribute("message", "아이디 중복검사를 다시 진행해주세요.");
+			return "member/memberJoinForm";
+		} else if (!m.getPw().equals(pwchk)) {
+			model.addAttribute("message", "비밀번호 체크를 다시 해주세요.");
+			return "member/memberJoinForm";
+		} else {
+			model.addAttribute("message", "사용자가 추가되었습니다. 로그인 하세요");
+			return "loginForm";
+		}
+	}
+	
+	@RequestMapping("idCheck")
+	public String idCheck(@RequestParam("id") String id, Model model) {
+		int result = ms.getMember(id) == null ? -1: 1;
+		model.addAttribute("result", result);
+		model.addAttribute("id", id);
+		return "member/idCheck";
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute("m") @Valid Member m, BindingResult result, Model model, HttpServletRequest request) {
