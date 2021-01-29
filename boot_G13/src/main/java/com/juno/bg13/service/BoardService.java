@@ -37,4 +37,12 @@ public class BoardService {
 		return bdao.selectReply(num);
 	}
 
+	public int insertReply(Reply r) {
+		return bdao.insertReply(r);		
+	}
+
+	public int deleteReply(int num) {
+		return bdao.deleteReply(num);
+	}
+
 }

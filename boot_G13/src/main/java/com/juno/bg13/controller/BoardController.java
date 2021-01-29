@@ -2,13 +2,18 @@ package com.juno.bg13.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.juno.bg13.dto.Reply;
 import com.juno.bg13.service.BoardService;
 import com.juno.bg13.util.Paging;
 
@@ -17,6 +22,30 @@ public class BoardController {
 	
 	@Autowired
 	BoardService bs;
+
+	@RequestMapping(value = "/deleteReply")
+	public String deleteReply(Model model, HttpServletRequest request
+			, @RequestParam("num") int num
+			, @RequestParam("boardnum") int boardnum
+			) {
+
+		if (request.getSession().getAttribute("loginUser") == null) {
+			return "loginForm";
+		} else {
+			bs.deleteReply(num);
+			return "redirect:/boardView?num="+boardnum;	
+		}
+	}
+
+	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
+	public String addReply(@ModelAttribute("r") @Valid Reply r, BindingResult result, Model model) {
+		if (result.getFieldError("content") != null) {
+			model.addAttribute("message", "내용을 입력하세요");
+			return "redirect:/boardView?num="+r.getBoardnum();
+		}
+		bs.insertReply(r);
+		return "redirect:/boardView?num="+r.getBoardnum();
+	}
 
 	@RequestMapping(value = "/boardView")
 	public String boardView(Model model, HttpServletRequest request

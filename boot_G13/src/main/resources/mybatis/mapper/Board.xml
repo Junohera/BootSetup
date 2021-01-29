@@ -36,4 +36,22 @@
     <select id="getReplyCnt" resultType="_int">
     	select count(*) from reply where boardnum = #{param1}
     </select>
+    
+    <insert id="insertReply" parameterType="com.juno.bg13.dto.Reply">
+    	insert into reply (
+            num
+            , boardnum
+            , userid
+            , content
+    	) values (
+            reply_seq.nextval
+            , #{boardnum}
+            , #{userid}
+            , #{content}
+    	)
+    </insert>
+    
+    <delete id="deleteReply">
+    	delete from reply where num = #{param1}
+    </delete>
 </mapper>

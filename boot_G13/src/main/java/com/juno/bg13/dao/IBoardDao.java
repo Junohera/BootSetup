@@ -16,4 +16,6 @@ public interface IBoardDao {
 	int incrementReadcount(int num);
 	List<Reply> selectReply(int num);
 	int getReplyCnt(int num);
+	int insertReply(Reply r);
+	int deleteReply(int num);
 }
