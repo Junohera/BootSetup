@@ -7,6 +7,14 @@
     	select count(*) from board
     </select>
     
-    <select id="getAll" parameterType="com.juno.bg13.util.Paging">
+    <select id="getAll" parameterType="com.juno.bg13.util.Paging" resultType="com.juno.bg13.dto.Board">
+        select * from (
+        select * from (
+            select
+                rownum as rn
+                , b.*
+            from ((select * from board order by num desc) b)
+        ) where rn &gt;= #{startNum}
+        ) where rn &lt;= #{endNum}
     </select>    
 </mapper>
