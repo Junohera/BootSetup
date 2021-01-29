@@ -16,7 +16,7 @@ public class MemberService {
 		return md.getMember(id);
 	}
 
-	public int insertMember(Member m) {
-		return md.insertMember(m.getId(), m.getPw(), m.getName(), m.getEmail(), m.getPhone1(), m.getPhone2(), m.getPhone3());
+	public int insertMember(String id, String pw, String name, String email, String phone1, String phone2, String phone3) {
+		return md.insertMember(id, pw, name, email, phone1, phone2, phone3);
 	}
 }
