@@ -29,3 +29,20 @@ delete from bbs;
 insert into bbs values('hong', 'gildong', '반갑습니다', '수고하세요');
 insert into bbs values('hong', 'gildona', '반갑습니다', '수고하세요');
 insert into bbs values('hong', 'gildonz', '반갑습니다', '수고하세요');
+
+select * from board;
+
+select * from spmember;
+
+delete from spmember;
+
+insert into spmember values('juno1', '1234', '최준호1', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno2', '1234', '최준호2', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno3', '1234', '최준호3', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno4', '1234', '최준호4', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno5', '1234', '최준호5', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno6', '1234', '최준호6', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno7', '1234', '최준호7', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno8', '1234', '최준호8', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno9', '1234', '최준호9', '010', '2172', '7798', 'selectjuno@gmail.com');
+insert into spmember values('juno10', '1234', '최준호10', '010', '2172', '7798', 'selectjuno@gmail.com');
