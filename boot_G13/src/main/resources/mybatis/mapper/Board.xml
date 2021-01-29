@@ -3,5 +3,10 @@
 
 <mapper namespace="com.juno.bg13.dao.IBoardDao">
     
+	<select id="getAllCount" resultType="_int">
+    	select count(*) from board
+    </select>
     
+    <select id="getAll" parameterType="com.juno.bg13.util.Paging">
+    </select>    
 </mapper>
