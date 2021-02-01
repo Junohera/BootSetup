@@ -8,7 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/board.css">
-<script src="/js/board.js"></script>
+<script>
+	function open_win(url, name) {
+		window.open(url, name, "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=500, height=230");
+	}
+</script>
 </head>
 <body>
     <div id="wrap" align="center">

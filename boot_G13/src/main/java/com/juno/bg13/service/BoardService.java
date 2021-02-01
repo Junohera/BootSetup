@@ -27,6 +27,10 @@ public class BoardService {
 	public int getAllCount() {
 		return bdao.getAllCount();
 	}
+	
+	public Board getBoard(int num) {
+		return bdao.getBoard(num);
+	}
 
 	public Board readBoard(int num) {
 		bdao.incrementReadcount(num);
@@ -43,6 +47,19 @@ public class BoardService {
 
 	public int deleteReply(int num) {
 		return bdao.deleteReply(num);
+	}
+
+	public int updateBoard(Board b) {
+		return bdao.updateBoard(b);
+	}
+
+	public void removeBoard(int num) {
+		bdao.deleteReplyByBoard(num);
+		bdao.deleteBoard(num);
+	}
+
+	public int insertBoard(Board b) {
+		return bdao.insertBoard(b);
 	}
 
 }

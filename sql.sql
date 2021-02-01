@@ -48,3 +48,4 @@ insert into spmember values('juno9', '1234', '최준호9', '010', '2172', '7798'
 insert into spmember values('juno10', '1234', '최준호10', '010', '2172', '7798', 'selectjuno@gmail.com');
 
 select * from reply;
+select * from reply where boardnum = 324;

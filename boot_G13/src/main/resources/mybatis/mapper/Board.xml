@@ -54,4 +54,39 @@
     <delete id="deleteReply">
     	delete from reply where num = #{param1}
     </delete>
+    
+    <delete id="deleteReplyByBoard">
+    	delete from reply where boardnum = #{param1}
+    </delete>
+    
+    <delete id="deleteBoard">
+    	delete from board where num = #{param1}
+    </delete>
+    
+    <update id="updateBoard" parameterType="com.juno.bg13.dto.Board">
+    	update board 
+        set
+            pass = #{pass}
+            , email = #{email}
+            , title = #{title}
+            , content = #{content}
+    	where num = #{num}
+    </update>
+    <insert id="insertBoard" parameterType="com.juno.bg13.dto.Board">
+        insert into board (
+            num
+            , userid
+            , pass
+            , email
+            , title
+            , content
+        ) values (
+            board_seq.nextval
+            , #{userid}
+            , #{pass}
+            , #{email}
+            , #{title}
+            , #{content}
+        )
+    </insert>
 </mapper>

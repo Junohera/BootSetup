@@ -21,7 +21,7 @@
 						<input type="button" value="logout" onclick="location.href='logout'">						
 					</div>
 					<div style="float:right;">
-						<a href="boardwriteForm">add</a>
+						<a href="boardWriteForm">add</a>
 					</div>
 				</td>
 			</tr>

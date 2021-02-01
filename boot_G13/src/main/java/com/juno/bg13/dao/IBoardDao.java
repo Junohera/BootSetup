@@ -18,4 +18,8 @@ public interface IBoardDao {
 	int getReplyCnt(int num);
 	int insertReply(Reply r);
 	int deleteReply(int num);
+	int deleteReplyByBoard(int boardnum);
+	int updateBoard(Board b);
+	void deleteBoard(int num);
+	int insertBoard(Board b);
 }
