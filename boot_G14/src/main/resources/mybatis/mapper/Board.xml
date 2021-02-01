@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.juno.bg14.dao.IBoardDao">
+    
+	<select id="getAllCount" resultType="_int">
+    	select count(*) from board
+    </select>
+    
+    <select id="getAll" parameterType="com.juno.bg14.util.Paging" resultType="com.juno.bg14.dto.Board">
+        select * from (
+        select * from (
+            select
+                rownum as rn
+                , b.*
+            from ((select * from board order by num desc) b)
+        ) where rn &gt;= #{startNum}
+        ) where rn &lt;= #{endNum}
+    </select>
+    
+    <select id="getBoard" resultType="com.juno.bg14.dto.Board">
+    	select * from board where num = #{param1}
+    </select>
+    
+    <update id="incrementReadcount">
+    	update board
+    		set readcount = readcount+1
+    	where num = #{param}
+    </update>
+    
+    <select id="selectReply" resultType="com.juno.bg14.dto.Reply">
+    	select * from reply
+    	where boardnum = #{param1} order by num desc
+    </select>
+    
+    <select id="getReplyCnt" resultType="_int">
+    	select count(*) from reply where boardnum = #{param1}
+    </select>
+    
+    <insert id="insertReply" parameterType="com.juno.bg14.dto.Reply">
+    	insert into reply (
+            num
+            , boardnum
+            , userid
+            , content
+    	) values (
+            reply_seq.nextval
+            , #{boardnum}
+            , #{userid}
+            , #{content}
+    	)
+    </insert>
+    
+    <delete id="deleteReply">
+    	delete from reply where num = #{param1}
+    </delete>
+    
+    <delete id="deleteReplyByBoard">
+    	delete from reply where boardnum = #{param1}
+    </delete>
+    
+    <delete id="deleteBoard">
+    	delete from board where num = #{param1}
+    </delete>
+    
+    <update id="updateBoard" parameterType="com.juno.bg14.dto.Board">
+    	update board 
+        set
+            pass = #{pass}
+            , email = #{email}
+            , title = #{title}
+            , content = #{content}
+    	where num = #{num}
+    </update>
+    <insert id="insertBoard" parameterType="com.juno.bg14.dto.Board">
+        insert into board (
+            num
+            , userid
+            , pass
+            , email
+            , title
+            , content
+        ) values (
+            board_seq.nextval
+            , #{userid}
+            , #{pass}
+            , #{email}
+            , #{title}
+            , #{content}
+        )
+    </insert>
+</mapper>
