@@ -64,6 +64,13 @@
 			<version>05Nov2002</version>
 		</dependency>
 
+		<!-- DataBase -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>12.1.0.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
