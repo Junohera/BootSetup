@@ -80,6 +80,7 @@
             , email
             , title
             , content
+            , image
         ) values (
             board_seq.nextval
             , #{userid}
@@ -87,6 +88,7 @@
             , #{email}
             , #{title}
             , #{content}
+            , #{image}
         )
     </insert>
 </mapper>

@@ -58,6 +58,7 @@
 			<input type="reset" value="clear">
 			<input type="button" value="list" onclick="location.href='main';">
 		</form>
+		${message}
 	</div>
 </body>
 </html>

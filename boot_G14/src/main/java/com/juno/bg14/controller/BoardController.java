@@ -32,11 +32,10 @@ public class BoardController {
 	BoardService bs;
 	
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
-	public String boardWrite(@ModelAttribute("b") @Valid Board b, BindingResult result
+	public String boardWrite(@ModelAttribute("b") Board b, BindingResult result
 			, Model model
 			, HttpServletRequest request
 			) {
-		Board insertBoard = new Board();
 		try {
 			String path = ResourceUtils.getFile("classpath:static/upload/").toPath().toString();
 			MultipartRequest multi = new MultipartRequest(
@@ -46,28 +45,29 @@ public class BoardController {
 					, "UTF-8"
 					, new DefaultFileRenamePolicy()
 			);
-			insertBoard.setUserid(multi.getParameter("userid"));
-			insertBoard.setPass(multi.getParameter("pass"));
-			insertBoard.setEmail(multi.getParameter("email"));
-			insertBoard.setTitle(multi.getParameter("title"));
-			insertBoard.setContent(multi.getParameter("content"));
+			b.setUserid(multi.getParameter("userid"));
+			b.setPass(multi.getParameter("pass"));
+			b.setEmail(multi.getParameter("email"));
+			b.setTitle(multi.getParameter("title"));
+			b.setContent(multi.getParameter("content"));
 			String file = multi.getFilesystemName("filename");
-			insertBoard.setImage(file);
+			if (file == null) {
+				file = "";
+			}
+			b.setImage(file);
 			
 			ContentValidator validator = new ContentValidator();
-			validator.validate(insertBoard, result);
+			validator.validate(b, result);
 			
 			if (result.hasErrors()) {
 				if (result.getFieldError("pass") != null)
-					model.addAttribute("message", result.getFieldError("pass").getCode());
+					model.addAttribute("message", "pass");
 				if (result.getFieldError("email") != null)
-					model.addAttribute("message", result.getFieldError("email").getCode());
+					model.addAttribute("message", "email");
 				if (result.getFieldError("title") != null)
-					model.addAttribute("message", result.getFieldError("title").getCode());
+					model.addAttribute("message", "title");
 				if (result.getFieldError("content") != null)
-					model.addAttribute("message", result.getFieldError("content").getCode());
-
-				model.addAttribute("b", insertBoard);
+					model.addAttribute("message", "content");
 				return "board/boardWriteForm";
 			}
 		} catch (IOException e) {e.printStackTrace();}
