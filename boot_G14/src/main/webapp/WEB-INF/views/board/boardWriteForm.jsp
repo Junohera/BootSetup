@@ -47,6 +47,12 @@
 						<textarea cols="70" rows="15" name="content"></textarea>
 					</td>
 				</tr>
+				<tr>
+					<th>이미지</th>
+					<td>
+						<input type="file" name="filename" >
+					</td>
+				</tr>
 			</table>
 			<input type="submit" value="add">
 			<input type="reset" value="clear">
