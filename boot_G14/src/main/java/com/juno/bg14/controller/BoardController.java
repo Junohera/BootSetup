@@ -56,7 +56,22 @@ public class BoardController {
 			
 			ContentValidator validator = new ContentValidator();
 			validator.validate(insertBoard, result);
+			
+			if (result.hasErrors()) {
+				if (result.getFieldError("pass") != null)
+					model.addAttribute("message", result.getFieldError("pass").getCode());
+				if (result.getFieldError("email") != null)
+					model.addAttribute("message", result.getFieldError("email").getCode());
+				if (result.getFieldError("title") != null)
+					model.addAttribute("message", result.getFieldError("title").getCode());
+				if (result.getFieldError("content") != null)
+					model.addAttribute("message", result.getFieldError("content").getCode());
+
+				model.addAttribute("b", insertBoard);
+				return "board/boardWriteForm";
+			}
 		} catch (IOException e) {e.printStackTrace();}
+		
 		bs.insertBoard(b);
 		return "redirect:/main";
 	}
