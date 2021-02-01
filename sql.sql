@@ -49,3 +49,7 @@ insert into spmember values('juno10', '1234', '최준호10', '010', '2172', '779
 
 select * from reply;
 select * from reply where boardnum = 324;
+
+select * from board;
+
+alter table board add image varchar2(30);

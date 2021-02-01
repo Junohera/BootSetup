@@ -22,10 +22,10 @@ table td, th {
 th {
     background: yellowgreen;
 }
-img {
+/* img {
     width: 220px;
     height: 300px;
-}
+} */
 a {
     text-decoration: none;
     color: black;

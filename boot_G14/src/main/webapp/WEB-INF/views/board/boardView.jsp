@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -36,7 +36,19 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-                <td colspan="3"><pre>${b.content}</pre></td>
+                <td align="center" valign="top"><pre>${b.content}</pre></td>
+                
+                <th>이미지</th>
+                <td align="center">
+                	<c:choose>
+						<c:when test="${empty b.image}">
+							<img src="/upload/noimage.jpg" width="300">
+						</c:when>
+						<c:otherwise>
+							<img src="/upload/${b.image}" width="300">
+						</c:otherwise>
+                	</c:choose>
+                </td>
 			</tr>
 		</table>
 		<br><br>
@@ -52,7 +64,12 @@
             <input type="hidden" name="userid" value="${loginUser.id}">
 			<table>
 				<tr>
-					<td width="100">${loginUser.id}</td>
+                    <th>작성자</th>
+                    <th>작성일시</th>
+                    <th colspan="2">내용</th>
+                </tr>
+				<tr>
+					<td width="100" align="center">${loginUser.id}</td>
 					<td width="100"><fmt:formatDate value="${now}" pattern="yyyy.MM.dd HH:mm"></fmt:formatDate></td>
 					<td width="670"><input type="text" name="content" size="85"></td>
 					<td width="100"><input type="submit" value="add"></td>
@@ -65,22 +82,16 @@
                         </tr>
                     </c:when>
                     <c:otherwise>
-                        <tr>
-                            <th>작성자</th>
-                            <th>작성일시</th>
-                            <th>내용</th>
-                            <th>&nbsp;</th>
-                        </tr>
                         <c:forEach var="r" items="${replyList}" varStatus="status">
                             <tr>
                                 <td align="center">${r.userid}</td>
                                 <td align="center"><fmt:formatDate value="${r.writedate}" pattern="MM/dd HH:mm"></fmt:formatDate></td>
-                                <td align="center">${r.content}</td>
-                                <td align="center">
-                                    <c:if test="${r.userid == loginUser.id}">
-                                        <input type="button" value="del" onclick="location.href='deleteReply?num=${r.num}&boardnum=${r.boardnum}'">
-                                    </c:if>&nbsp;
-                                </td>
+                                <td align="center" <c:if test="${r.userid ne loginUser.id}">colspan="2"</c:if>>${r.content}</td>
+                                <c:if test="${r.userid == loginUser.id}">
+	                                <td align="center">
+	                                    <input type="button" value="del" onclick="location.href='deleteReply?num=${r.num}&boardnum=${r.boardnum}'">
+	                                </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </c:otherwise>

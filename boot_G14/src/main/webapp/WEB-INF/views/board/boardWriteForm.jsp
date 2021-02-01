@@ -14,7 +14,7 @@
 <body>
 	<div id="wrap">
 	<h1>write</h1>
-		<form name="frm" method="post" action="boardWrite">
+		<form name="frm" method="post" action="boardWrite" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<th>작성자</th>
