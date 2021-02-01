@@ -1,5 +1,7 @@
 package com.juno.bg14.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -7,17 +9,21 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.juno.bg13.valid.ContentValidator;
 import com.juno.bg14.dto.Board;
 import com.juno.bg14.dto.Member;
 import com.juno.bg14.dto.Reply;
 import com.juno.bg14.service.BoardService;
 import com.juno.bg14.util.Paging;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class BoardController {
@@ -30,20 +36,27 @@ public class BoardController {
 			, Model model
 			, HttpServletRequest request
 			) {
-		if ((Member) request.getSession().getAttribute("loginUser") == null) {
-			return "loginForm";
-		} else if (result.hasErrors()) {
-			if (result.getFieldError("pass") != null)
-				model.addAttribute("message", result.getFieldError("pass").getDefaultMessage());
-			else if (result.getFieldError("email") != null)
-				model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
-			else if (result.getFieldError("title") != null)
-				model.addAttribute("message", result.getFieldError("title").getDefaultMessage());
-			else if (result.getFieldError("content") != null)
-				model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		Board insertBoard = new Board();
+		try {
+			String path = ResourceUtils.getFile("classpath:static/upload/").toPath().toString();
+			MultipartRequest multi = new MultipartRequest(
+					request
+					, path
+					, 1024 * 1024 * 10
+					, "UTF-8"
+					, new DefaultFileRenamePolicy()
+			);
+			insertBoard.setUserid(multi.getParameter("userid"));
+			insertBoard.setPass(multi.getParameter("pass"));
+			insertBoard.setEmail(multi.getParameter("email"));
+			insertBoard.setTitle(multi.getParameter("title"));
+			insertBoard.setContent(multi.getParameter("content"));
+			String file = multi.getFilesystemName("filename");
+			insertBoard.setImage(file);
 			
-			return "board/boardWriteForm";
-		}
+			ContentValidator validator = new ContentValidator();
+			validator.validate(insertBoard, result);
+		} catch (IOException e) {e.printStackTrace();}
 		bs.insertBoard(b);
 		return "redirect:/main";
 	}
