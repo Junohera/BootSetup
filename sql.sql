@@ -53,3 +53,4 @@ select * from reply where boardnum = 324;
 select * from board;
 
 alter table board add image varchar2(30);
+ALTER TABLE board MODIFY image varchar2(100);
