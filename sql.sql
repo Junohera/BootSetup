@@ -50,7 +50,10 @@ insert into spmember values('juno10', '1234', '최준호10', '010', '2172', '779
 select * from reply;
 select * from reply where boardnum = 324;
 
-select * from board;
+select * from board order by num desc;
+
+update board set pass = '1234' where num = 333;
+delete from board where num = 335;
 
 alter table board add image varchar2(30);
 ALTER TABLE board MODIFY image varchar2(100);

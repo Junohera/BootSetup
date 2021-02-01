@@ -70,6 +70,7 @@
             , email = #{email}
             , title = #{title}
             , content = #{content}
+            , image = #{image}
     	where num = #{num}
     </update>
     <insert id="insertBoard" parameterType="com.juno.bg14.dto.Board">

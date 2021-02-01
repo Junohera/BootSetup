@@ -95,28 +95,52 @@ public class BoardController {
 
 	@RequestMapping(value = "/boardUpdate", method = RequestMethod.POST)
 	public String boardUpdate(Model model, HttpServletRequest request
-			, @ModelAttribute("b") @Valid Board b
+			, @ModelAttribute("b") Board b
 			, BindingResult result
 		) {
+		try {
+			String path = ResourceUtils.getFile("classpath:static/upload/").toPath().toString();
+			MultipartRequest multi = new MultipartRequest(
+					request
+					, path
+					, 1024 * 1024 * 10
+					, "UTF-8"
+					, new DefaultFileRenamePolicy()
+			);
+			b.setNum(Integer.parseInt(multi.getParameter("num")));
+			b.setUserid(multi.getParameter("userid"));
+			b.setPass(multi.getParameter("pass"));
+			b.setEmail(multi.getParameter("email"));
+			b.setTitle(multi.getParameter("title"));
+			b.setContent(multi.getParameter("content"));
+			String file = multi.getFilesystemName("filename");
+			String oldimage = multi.getParameter("oldimage");
+			if (file != null) {
+				b.setImage(file);
+			} else if (oldimage != null) {
+				b.setImage(oldimage);
+			} else {
+				b.setImage(null);
+			}
+			
+			ContentValidator validator = new ContentValidator();
+			validator.validate(b, result);
+			
+			if (result.hasErrors()) {
+				if (result.getFieldError("pass") != null)
+					model.addAttribute("message", "pass");
+				if (result.getFieldError("email") != null)
+					model.addAttribute("message", "email");
+				if (result.getFieldError("title") != null)
+					model.addAttribute("message", "title");
+				if (result.getFieldError("content") != null)
+					model.addAttribute("message", "content");
+				
+				return "board/boardUpdateForm";
+			}
+		} catch (IOException e) {e.printStackTrace();}
 		
-		if (result.hasErrors()) {
-			if (result.getFieldError("page") != null) {
-				model.addAttribute("message", result.getFieldError("pass"));
-			}
-			else if (result.getFieldError("email") != null) {
-				model.addAttribute("message", result.getFieldError("email"));
-			}
-			else if (result.getFieldError("title") != null) {
-				model.addAttribute("message", result.getFieldError("title"));
-			}
-			else if (result.getFieldError("content") != null) {
-				model.addAttribute("message", result.getFieldError("content"));
-			}
-			return "board/boardUpdateForm";
-		}
-
 		bs.updateBoard(b);
-		
 		return "redirect:/boardViewAfterReply?num=" + b.getNum();
 	}
 
