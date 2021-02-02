@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juno.bm01.dao.IOrderDao">
+
+    <insert id="insertOrders">
+    	insert into orders(oseq, id) values(orders_seq.nextval, #{param1})
+    </insert>
+    
+    <select id="lookupMaxOseq" resultType="_int">
+    	select max(oseq) from orders
+    </select>
+    
+    <update id="updateCart">
+    	update cart set result = '2' where cseq = #{param1}
+    </update>
+    
+    <insert id="insertOrderDetail">
+    	insert into order_detail(odseq, oseq, pseq, quantity)
+    	values (order_detail_seq.nextval, #{param2}, #{param1.pseq}, #{param1.quantity})
+    </insert>
+    
+    <select id="listOrderById" resultType="com.juno.bm01.dto.Order">
+    	select * from order_view
+    	where id = #{param1}
+    	and result like '%'||#{param2}||'%'
+    	and oseq = #{param3}
+    </select>
+    
+    <select id="orderMasterByIdAndResult" resultType="int">
+    select distinct oseq from order_view where id = #{param1} and result = '1' order by oseq desc
+    </select>
+    
+    <select id="orderMasterById" resultType="int">
+    	select distinct oseq from order_view where id = #{param1} order by oseq desc
+    </select>
+    
+    <select id="selectOrderDetail" resultType="com.juno.bm01.dto.Order">
+    	SELECT * FROM ORDER_VIEW WHERE OSEQ = #{param1} ORDER BY OSEQ DESC
+    </select>
+    
+</mapper>

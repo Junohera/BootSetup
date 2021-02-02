@@ -22,4 +22,12 @@ public class ProductService {
 		return pd.getBestList();
 	}
 
+	public List<Product> getKindList(String kind) {
+		return pd.getKindList(kind);
+	}
+
+	public Product getProduct(int pseq) {
+		return pd.getProduct(pseq);
+	}
+
 }

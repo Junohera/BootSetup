@@ -2,12 +2,16 @@ package com.juno.bm01.dto;
 
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotEmpty;
+
 import lombok.Data;
 
 @Data
 public class Qna {
 	private Integer qseq;
+	@NotEmpty
 	private String subject;
+	@NotEmpty
 	private String content;
 	private String reply;
 	private String id;

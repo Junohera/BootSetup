@@ -8,11 +8,6 @@ function go_cart() {
     }
 };
 
-function go_order() {
-    document.formm.action = "orderInsert";
-    document.formm.submit();
-};
-
 function go_buy() {
     document.formm.action = "immediatelyBuy";
     document.formm.submit();

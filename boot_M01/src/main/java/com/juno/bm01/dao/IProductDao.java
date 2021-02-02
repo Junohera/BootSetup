@@ -10,4 +10,6 @@ import com.juno.bm01.dto.Product;
 public interface IProductDao {
 	List<Product> getNewList();
 	List<Product> getBestList();
+	List<Product> getKindList(String kind);
+	Product getProduct(int pseq);
 }
