@@ -5,4 +5,40 @@
     <select id="getMember" resultType="com.juno.bm01.dto.Member">
         select * from member where id = #{param1}
     </select>
+    
+    <select id="selectAddressByDong" resultType="com.juno.bm01.dto.Address">
+    	select * from address where dong like '%'||#{param1}||'%'
+    </select>
+    
+    <insert id="insertMember" parameterType="com.juno.bm01.dto.Member">
+    	insert into member (
+            id
+            , pwd
+            , name
+            , email
+            , zip_num
+            , address
+            , phone
+    	) values (
+    	    #{id}
+            , #{pwd}
+            , #{name}
+            , #{email}
+            , #{zip_num}
+            , #{address}
+            , #{phone}
+    	)
+    </insert>
+
+    <update id="updateMember" parameterType="com.juno.bm01.dto.Member">
+        update member
+        set
+            pwd = #{pwd}
+            , name = #{name}
+            , email = #{email}
+            , zip_num = #{zip_num}
+            , address = #{address}
+            , phone = #{phone}
+        where id = #{id}
+    </update>
 </mapper>
