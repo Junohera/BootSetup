@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juno.bm01.dao.IProductDao">
+
+    <select id="getNewList" resultType="com.juno.bm01.dto.Product">
+        select * from new_pro_view order by pseq desc
+    </select>
+
+    <select id="getBestList" resultType="com.juno.bm01.dto.Product">
+        select * from best_pro_view order by pseq desc
+    </select>
+</mapper>

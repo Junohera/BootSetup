@@ -57,3 +57,5 @@ delete from board where num = 335;
 
 alter table board add image varchar2(30);
 ALTER TABLE board MODIFY image varchar2(100);
+
+select * from best_pro_view order by pseq desc;
