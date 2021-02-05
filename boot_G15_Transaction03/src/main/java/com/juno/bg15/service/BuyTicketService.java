@@ -3,6 +3,8 @@ package com.juno.bg15.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -22,6 +24,8 @@ public class BuyTicketService implements IBuyTicketService {
 	@Autowired
 	TransactionTemplate transactionTemplate;
 	
+//	@Transactional(propagation = Propagation.REQUIRED) // 관련 작업 모두 취소
+	@Transactional(propagation = Propagation.REQUIRES_NEW) // 현재 작업은 독립 실행
 	@Override
 	public int buy(String id, int amount, String error) {
 		try {
