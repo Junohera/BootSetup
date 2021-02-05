@@ -8,6 +8,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import com.juno.bg15.dao.ITransactionDAO1;
 import com.juno.bg15.dao.ITransactionDAO2;
+import com.juno.bg15.dao.ITransactionDAO3;
 
 @Service
 public class BuyTicketService implements IBuyTicketService {
@@ -35,13 +36,13 @@ public class BuyTicketService implements IBuyTicketService {
 						} 
 						
 						tdao2.pay(id, amount);
-						System.out.println("### Transaction Commit");
+						System.out.println("### Transaction #1 Commit");
 					}
 				}
 			);
 			return 1;
 		} catch (Exception e) {
-			System.out.println("### Transaction Rollback");
+			System.out.println("### Transaction #1 Rollback");
 			return 2;
 		}
 	}
